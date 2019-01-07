@@ -43,7 +43,7 @@
             CornerRadius="4"
             Margin="5">
             <TextBlock 
-            x:Name="RewsultTextBlock"
+            x:Name="ResultTextBlock"
              Grid.ColumnSpan="4" 
             Text="0"
             Style="{StaticResource ResultTextStyle}">
@@ -70,17 +70,17 @@
                 Content="/"
                 Style="{StaticResource ButtonStyle}">
         </Button>
-        <Button x:Name="SevenButton"
+        <Button x:Name="SevenButton" Click="NumericButton_Click"
                 Grid.Row="2" Grid.Column="0"
                 Content="7"
                 Style="{StaticResource ButtonStyle}">
         </Button>
-        <Button x:Name="EightButton"
+        <Button x:Name="EightButton" Click="NumericButton_Click"
                 Grid.Row="2" Grid.Column="1"
                 Content="8"
                 Style="{StaticResource ButtonStyle}">
         </Button>
-        <Button x:Name="NineButton"
+        <Button x:Name="NineButton" Click="NumericButton_Click"
                 Grid.Row="2" Grid.Column="2"
                 Content="9"
                 Style="{StaticResource ButtonStyle}">
@@ -90,17 +90,17 @@
                 Content="*"
                 Style="{StaticResource ButtonStyle}">
         </Button>
-        <Button x:Name="FourButton"
+        <Button x:Name="FourButton" Click="NumericButton_Click"
                 Grid.Row="3" Grid.Column="0"
                 Content="4"
                 Style="{StaticResource ButtonStyle}">
         </Button>
-        <Button x:Name="FiveButton"
+        <Button x:Name="FiveButton" Click="NumericButton_Click"
                 Grid.Row="3" Grid.Column="1"
                 Content="5"
                 Style="{StaticResource ButtonStyle}">
         </Button>
-        <Button x:Name="SixButton"
+        <Button x:Name="SixButton" Click="NumericButton_Click"
                 Grid.Row="3" Grid.Column="2"
                 Content="6"
                 Style="{StaticResource ButtonStyle}">
@@ -110,17 +110,17 @@
                 Content="-"
                 Style="{StaticResource ButtonStyle}">
         </Button>
-        <Button x:Name="OneButton"
+        <Button x:Name="OneButton" Click="NumericButton_Click"
                 Grid.Row="4" Grid.Column="0"
                 Content="1"
                 Style="{StaticResource ButtonStyle}">
         </Button>
-        <Button x:Name="TwoButton"
+        <Button x:Name="TwoButton" Click="NumericButton_Click"
                 Grid.Row="4" Grid.Column="1"
                 Content="2"
                 Style="{StaticResource ButtonStyle}">
         </Button>
-        <Button x:Name="ThreeButton"
+        <Button x:Name="ThreeButton" Click="NumericButton_Click"
                 Grid.Row="4" Grid.Column="2"
                 Content="3"
                 Style="{StaticResource ButtonStyle}">
@@ -130,7 +130,7 @@
                 Content="+"
                 Style="{StaticResource ButtonStyle}">
         </Button>
-        <Button x:Name="ZeroButton"
+        <Button x:Name="ZeroButton" Click="NumericButton_Click"
                 Grid.Row="5" Grid.ColumnSpan="2"
                 Content="0"
                 Style="{StaticResource ButtonStyle}">
