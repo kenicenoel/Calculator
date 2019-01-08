@@ -41,9 +41,9 @@ namespace Calculator
                     break;
 
                 case ".":
-                    if ( double.TryParse(ResultTextBlock.Text, out _lastNumber) )
+                    if ( !ResultTextBlock.Text.Contains("."))
                     {
-                        ResultTextBlock.Text = $"{_lastNumber}.";
+                        ResultTextBlock.Text = $"{ResultTextBlock.Text}.";
                     }
 
                     break;
@@ -80,7 +80,15 @@ namespace Calculator
                                 break;
 
                             case ActiveOperand.Divide:
-                                _result = Divide(_lastNumber, newNumber);
+                                if(newNumber == 0)
+                                {
+                                    MessageBox.Show("You can't divide by 0.", "Head's up", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                }
+                                else
+                                {
+                                    _result = Divide(_lastNumber, newNumber);
+                                }
+                               
                                 break;
 
                             case ActiveOperand.Multiply:
