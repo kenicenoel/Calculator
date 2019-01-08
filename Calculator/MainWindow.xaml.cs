@@ -166,5 +166,20 @@ namespace Calculator
             var displayText = ResultTextBlock.Text;
             ResultTextBlock.Text = displayText == "0" ? $"{selectedValue}" : $"{displayText}{selectedValue}";
         }
+
+        private void Minimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void Grid_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        { 
+                DragMove();
+        }
     }
 }
