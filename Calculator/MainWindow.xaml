@@ -39,7 +39,7 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Grid.ColumnSpan="4" Background="DarkSlateGray" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+        <Grid Grid.Row="0" Grid.ColumnSpan="4" Background="#444444" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button x:Name="Minimize" Background="Transparent" 
                         BorderThickness="0" 
