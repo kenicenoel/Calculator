@@ -8,6 +8,7 @@
         WindowState="Normal"
        WindowStyle="None"
         AllowsTransparency="True"
+        Keyboard.KeyDown="Window_KeyDown"
         Title="Calculator" Height="600" Width="350">
     <Window.Resources>
         <Style x:Key="ResultTextStyle" TargetType="TextBlock">

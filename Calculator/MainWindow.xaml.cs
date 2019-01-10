@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using static Calculator.Globals;
 
 namespace Calculator
@@ -20,8 +21,7 @@ namespace Calculator
             switch ( clickedButtonContent )
             {
                 case "AC":
-                    _activeOperand = ActiveOperand.None;
-                    ResultTextBlock.Text = "0";
+                    ResetCalculator();
                     break;
 
                 case "%":
@@ -41,11 +41,7 @@ namespace Calculator
                     break;
 
                 case ".":
-                    if ( !ResultTextBlock.Text.Contains("."))
-                    {
-                        ResultTextBlock.Text = $"{ResultTextBlock.Text}.";
-                    }
-
+                    PlaceDecimalPoint();
                     break;
 
                 case "+":
@@ -69,47 +65,63 @@ namespace Calculator
                     break;
 
                 case "=":
-                    
-                    
-                    if ( double.TryParse(ResultTextBlock.Text, out double newNumber) )
-                    {
-                        switch(_activeOperand)
-                        {
-                            case ActiveOperand.Add:
-                                _result = Add(_lastNumber, newNumber);
-                                break;
-
-                            case ActiveOperand.Divide:
-                                if(newNumber == 0)
-                                {
-                                    MessageBox.Show("You can't divide by 0.", "Head's up", MessageBoxButton.OK, MessageBoxImage.Warning);
-                                }
-                                else
-                                {
-                                    _result = Divide(_lastNumber, newNumber);
-                                }
-                               
-                                break;
-
-                            case ActiveOperand.Multiply:
-                                _result = Multiply(_lastNumber, newNumber);
-                                break;
-
-                            case ActiveOperand.Subtract:
-                                _result = Subtract(_lastNumber, newNumber);
-                                break;
-                        }
-                    }
+                    PerformCalculation();
                     ResultTextBlock.Text = _result.ToString();
                     _lastNumber = _result;
-                    //_activeOperand = ActiveOperand.None;
                     break;
-                   
-                
+
+
             }
 
 
-            
+
+        }
+
+        private void ResetCalculator()
+        {
+            _activeOperand = ActiveOperand.None;
+            ResultTextBlock.Text = "0";
+        }
+
+        private void PlaceDecimalPoint()
+        {
+            if ( !ResultTextBlock.Text.Contains(".") )
+            {
+                ResultTextBlock.Text = $"{ResultTextBlock.Text}.";
+            }
+        }
+
+        private void PerformCalculation()
+        {
+            if ( double.TryParse(ResultTextBlock.Text, out double newNumber) )
+            {
+                switch ( _activeOperand )
+                {
+                    case ActiveOperand.Add:
+                        _result = Add(_lastNumber, newNumber);
+                        break;
+
+                    case ActiveOperand.Divide:
+                        if ( newNumber == 0 )
+                        {
+                            MessageBox.Show("You can't divide by 0.", "Head's up", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
+                        else
+                        {
+                            _result = Divide(_lastNumber, newNumber);
+                        }
+
+                        break;
+
+                    case ActiveOperand.Multiply:
+                        _result = Multiply(_lastNumber, newNumber);
+                        break;
+
+                    case ActiveOperand.Subtract:
+                        _result = Subtract(_lastNumber, newNumber);
+                        break;
+                }
+            }
         }
 
         private void UpdateLastNumber()
@@ -123,7 +135,7 @@ namespace Calculator
         private void NumericButton_Click(object sender, RoutedEventArgs e)
         {
             var selectedValue = 0;
-            if(sender == ZeroButton)
+            if ( sender == ZeroButton )
             {
                 selectedValue = 0;
             }
@@ -177,9 +189,86 @@ namespace Calculator
             Close();
         }
 
-        private void Grid_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        { 
-                DragMove();
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            var keyPressed = e.Key;
+            switch ( keyPressed )
+            {
+                case Key.D0:
+                    UpdateResultTextBlock(0);
+                    break;
+                case Key.D1:
+                    UpdateResultTextBlock(1);
+                    break;
+                case Key.D2:
+                    UpdateResultTextBlock(2);
+                    break;
+                case Key.D3:
+                    UpdateResultTextBlock(3);
+                    break;
+                case Key.D4:
+                    UpdateResultTextBlock(4);
+                    break;
+                case Key.D5:
+                    UpdateResultTextBlock(5);
+                    break;
+                case Key.D6:
+                    UpdateResultTextBlock(6);
+                    break;
+                case Key.D7:
+                    UpdateResultTextBlock(7);
+                    break;
+                case Key.D8:
+                    UpdateResultTextBlock(8);
+                    break;
+                case Key.D9:
+                    UpdateResultTextBlock(9);
+                    break;
+                case Key.OemPeriod:
+                    PlaceDecimalPoint();
+                    break;
+                case Key.OemPlus:
+                    UpdateLastNumber();
+                    _activeOperand = ActiveOperand.Add;
+                    break;
+                case Key.OemMinus:
+                    UpdateLastNumber();
+                    _activeOperand = ActiveOperand.Subtract;
+                    break;
+                case Key.Multiply:
+                    UpdateLastNumber();
+                    _activeOperand = ActiveOperand.Multiply;
+                    break;
+                case Key.Divide:
+                    UpdateLastNumber();
+                    _activeOperand = ActiveOperand.Divide;
+                    break;
+                case Key.Back:
+                    ResultTextBlock.Text = ResultTextBlock.Text.Substring(0, ResultTextBlock.Text.Length - 1);
+                    break;
+                case Key.Delete:
+                    ResetCalculator();
+                    break;
+                case Key.Escape:
+                    Close();
+                    break;
+                case Key.Enter :
+                    PerformCalculation();
+                    ResultTextBlock.Text = _result.ToString();
+                    _lastNumber = _result;
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void UpdateResultTextBlock(int number)
+        {
+            ResultTextBlock.Text = ResultTextBlock.Text == "0" ? $"{number}" : $"{ResultTextBlock.Text}{number}";
         }
     }
 }
